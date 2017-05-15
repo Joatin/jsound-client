@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/Joatin/jsound-client.svg?branch=master)](https://travis-ci.org/Joatin/jsound-client)
 
 # JSound Web Client
 
