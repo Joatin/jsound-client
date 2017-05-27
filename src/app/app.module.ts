@@ -4,23 +4,41 @@ import { HttpModule } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// Material 2
+import '@angular/material/prebuilt-themes/purple-green.css';
+import { MdInputModule, MdButtonModule, MdListModule, MdMenuModule, MdSliderModule } from '@angular/material';
+import {MdSidenavModule} from '@angular/material';
+import {MdToolbarModule} from '@angular/material';
+import 'hammerjs';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
+
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
+import { NoContentComponent } from './no-content/no-content.component';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { LoginComponent } from './auth/login/login.component';
+import { LayoutComponent } from './layout/layout.component';
+import { HomeComponent } from './home/home.component';
+import { ContentComponent } from './content/content.component';
+import { AudioComponent } from './audio/audio.component';
+import { ViewerComponent } from './viewer/viewer.component';
+import { PlaylistComponent } from './content/playlist.component';
+import { CurrentContentViewComponent } from './content/current-content-view.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { MeetingComponent } from './meeting/meeting.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,19 +59,42 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    AboutComponent,
-    HomeComponent,
     NoContentComponent,
-    XLargeDirective
+    LoginComponent,
+    HomeComponent,
+    LayoutComponent,
+    ContentComponent,
+    AudioComponent,
+    ViewerComponent,
+    PlaylistComponent,
+    CurrentContentViewComponent,
+    MeetingComponent
   ],
   /**
    * Import Angular's modules.
    */
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    StoreModule.provideStore({ }, {
+      router: {
+        path: window.location.pathname + window.location.search
+      }
+    }),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    }),
+    RouterStoreModule.connectRouter(),
+    MdInputModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdButtonModule,
+    MdListModule,
+    MdMenuModule,
+    MdSliderModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

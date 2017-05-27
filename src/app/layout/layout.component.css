@@ -1,0 +1,17 @@
+
+md-sidenav-container {
+  height: 100%;
+}
+
+md-sidenav {
+  width: 200px;
+}
+
+nav > a[md-button] {
+  width: 100%;
+  text-align: left;
+}
+
+.active-link {
+  font-weight: bolder;
+}

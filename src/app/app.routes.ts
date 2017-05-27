@@ -1,15 +1,22 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
 
-import { DataResolver } from './app.resolver';
+import { LoginComponent } from './auth/login/login.component';
+import { NoContentComponent } from './no-content/no-content.component';
+import { LayoutComponent } from './layout/layout.component';
+import { HomeComponent } from './home/home.component';
+import { ContentComponent } from './content/content.component';
+import { AudioComponent } from './audio/audio.component';
+import { ViewerComponent } from './viewer/viewer.component';
+import { MeetingComponent } from './meeting/meeting.component';
 
 export const ROUTES: Routes = [
-  { path: '',      component: HomeComponent },
-  { path: 'home',  component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'detail', loadChildren: './+detail#DetailModule'},
-  { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
+  { path: 'login',      component: LoginComponent },
+  { path: '',  component: LayoutComponent, children: [
+    {path: '', component: HomeComponent},
+    {path: 'content', component: ContentComponent},
+    {path: 'audio', component: AudioComponent},
+    {path: 'viewers', component: ViewerComponent},
+    {path: 'meeting', component: MeetingComponent}
+  ] },
   { path: '**',    component: NoContentComponent },
 ];
