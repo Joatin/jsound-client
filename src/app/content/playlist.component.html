@@ -1,7 +1,18 @@
 <div>
   <md-list>
-    <h3 md-subheader>Introduction - Duration 3:00</h3>
-    <md-list-item>
-    </md-list-item>
+    <ng-template ngFor let-part [ngForOf]="playlistParts$ | async">
+      <h3 md-subheader>{{part.name}} - Duration {{part.duration | jsoundDuration}}</h3>
+      <ng-template ngFor let-item [ngForOf]="part.content">
+        <md-list-item>
+          <h4 md-line>{{item.name}} - Duration {{item.duration | jsoundDuration}}</h4>
+        </md-list-item>
+        <div>
+          <div *ngFor="let media of item.media">
+            <img width="96" height="96" src={{media.url}} (click)="openDialog('')" />
+          </div>
+        </div>
+      </ng-template>
+      <md-divider></md-divider>
+    </ng-template>
   </md-list>
 </div>

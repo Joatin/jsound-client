@@ -4,13 +4,16 @@ import { HttpModule } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Material 2
 import '@angular/material/prebuilt-themes/purple-green.css';
-import { MdInputModule, MdButtonModule, MdListModule, MdMenuModule, MdSliderModule } from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
-import {MdToolbarModule} from '@angular/material';
+import {
+  MdInputModule, MdButtonModule, MdListModule, MdMenuModule, MdSliderModule,
+  MdIconModule, MdDialogModule
+} from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
+import { MdToolbarModule } from '@angular/material';
 import 'hammerjs';
 
 /*
@@ -39,6 +42,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { MeetingComponent } from './meeting/meeting.component';
+import { DurationPipe } from './util/duration.pipe';
+import { ShowContentDialogComponent } from './content/show-content-dialog.component';
+import { VgCoreModule } from 'videogular2/src/core/core';
+import { contentReducerFunc } from './content/content.reducer';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -68,7 +75,9 @@ type StoreType = {
     ViewerComponent,
     PlaylistComponent,
     CurrentContentViewComponent,
-    MeetingComponent
+    MeetingComponent,
+    DurationPipe,
+    ShowContentDialogComponent
   ],
   /**
    * Import Angular's modules.
@@ -79,7 +88,7 @@ type StoreType = {
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
-    StoreModule.provideStore({ }, {
+    StoreModule.provideStore( { content: contentReducerFunc }, {
       router: {
         path: window.location.pathname + window.location.search
       }
@@ -94,7 +103,10 @@ type StoreType = {
     MdButtonModule,
     MdListModule,
     MdMenuModule,
-    MdSliderModule
+    MdSliderModule,
+    MdIconModule,
+    MdDialogModule,
+    VgCoreModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
@@ -102,6 +114,9 @@ type StoreType = {
   providers: [
     ENV_PROVIDERS,
     APP_PROVIDERS
+  ],
+  entryComponents: [
+    ShowContentDialogComponent
   ]
 })
 export class AppModule {
