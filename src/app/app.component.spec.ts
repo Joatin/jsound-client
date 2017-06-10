@@ -55,12 +55,4 @@ describe(`App`, () => {
     expect(comp.name).toEqual('Angular 2 Webpack Starter');
   });
 
-  it('should log ngOnInit', () => {
-    spyOn(console, 'log');
-    expect(console.log).not.toHaveBeenCalled();
-
-    comp.ngOnInit();
-    expect(console.log).toHaveBeenCalled();
-  });
-
 });

@@ -1,0 +1,34 @@
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="side">
+    <md-toolbar color="primary">
+      <span>Hall</span>
+    </md-toolbar>
+    <nav>
+      <a md-button [routerLink]="['/']" routerLinkActive="active-link">Home</a>
+      <a md-button [routerLink]="['/meeting']" routerLinkActive="active-link">Meeting</a>
+      <a md-button [routerLink]="['/content']" routerLinkActive="active-link">Content</a>
+      <a md-button [routerLink]="['/audio']" routerLinkActive="active-link">Audio</a>
+      <a md-button [routerLink]="['/viewers']" routerLinkActive="active-link">Viewers</a>
+      <a md-button [routerLink]="['/']" routerLinkActive="active-link">Schedule</a>
+    </nav>
+  </md-sidenav>
+
+  <div>
+    <md-toolbar class="horizontal" color="primary">
+      <button md-icon-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></button>
+      <span>JSound</span>
+      <div class="flex"></div>
+      <md-menu #appMenu="mdMenu">
+        <button md-menu-item>Settings</button>
+        <button md-menu-item (click)="logout()">Logout</button>
+      </md-menu>
+      <button md-icon-button [mdMenuTriggerFor]="appMenu">
+        <md-icon>more_vert</md-icon>
+      </button>
+    </md-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</md-sidenav-container>
