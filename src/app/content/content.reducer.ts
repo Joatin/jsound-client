@@ -39,5 +39,5 @@ export class ContentReducer extends Reducer<ContentState> {
 
 let reducer = new ContentReducer();
 export function contentReducerFunc(state, action) {
-  reducer.reduce(state, action);
+  return reducer.reduce(state, action);
 }

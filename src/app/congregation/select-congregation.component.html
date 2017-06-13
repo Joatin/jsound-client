@@ -1,0 +1,9 @@
+<div class="content">
+  <h3>Congregations</h3>
+  <md-list>
+    <md-list-item *ngFor="let congregation of congregations$">
+      <md-icon md-list-icon>folder</md-icon>
+      <h4 md-line>{{congregation.name}}</h4>
+    </md-list-item>
+  </md-list>
+</div>

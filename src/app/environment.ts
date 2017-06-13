@@ -9,10 +9,13 @@ import {
   ApplicationRef,
   enableProdMode
 } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { OAuth2AuthService } from './auth/oauth2-auth.service';
 /**
  * Environment Providers
  */
 let PROVIDERS: any[] = [
+  AuthService
   /**
    * Common env directives
    */
@@ -38,6 +41,7 @@ if ('production' === ENV) {
 
   PROVIDERS = [
     ...PROVIDERS,
+    {provide: AuthService, useValue: OAuth2AuthService}
     /**
      * Custom providers in production.
      */
@@ -61,6 +65,7 @@ if ('production' === ENV) {
    */
   PROVIDERS = [
     ...PROVIDERS,
+    {provide: AuthService, useClass: OAuth2AuthService}
     /**
      * Custom providers in development.
      */
