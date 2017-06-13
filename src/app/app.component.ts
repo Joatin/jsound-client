@@ -3,6 +3,7 @@
  */
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AppState } from './app.service';
+import { AuthService } from './auth/auth.service';
 
 /**
  * App Component
@@ -22,7 +23,10 @@ export class AppComponent {
   public url = 'https://twitter.com/AngularClass';
 
   constructor(
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    public auth: AuthService
+  ) {
+    auth['handleAuthentication']();
+  }
 
 }

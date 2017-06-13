@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 export abstract class AuthService {
-  public abstract login(username: string, password: string): Observable<Object>;
+  public abstract login(): void;
   public abstract logout(): Observable<void>;
+  public abstract isAuthenticated(): boolean
 }

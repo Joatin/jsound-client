@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
@@ -46,11 +47,15 @@ import { DurationPipe } from './util/duration.pipe';
 import { ShowContentDialogComponent } from './content/show-content-dialog.component';
 import { VgCoreModule } from 'videogular2/src/core/core';
 import { contentReducerFunc } from './content/content.reducer';
+import { AuthGuard } from './auth/auth-guard.service';
+import { SelectCongregationComponent } from './congregation/select-congregation.component';
+import { CallbackComponent } from './auth/callback/callback.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  AuthGuard
 ];
 
 type StoreType = {
@@ -77,7 +82,10 @@ type StoreType = {
     CurrentContentViewComponent,
     MeetingComponent,
     DurationPipe,
-    ShowContentDialogComponent
+    ShowContentDialogComponent,
+    SelectCongregationComponent,
+    CallbackComponent
+
   ],
   /**
    * Import Angular's modules.
@@ -87,6 +95,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    FlexLayoutModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
     StoreModule.provideStore( { content: contentReducerFunc }, {
       router: {
