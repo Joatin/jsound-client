@@ -14,7 +14,8 @@ import { CallbackComponent } from './auth/callback/callback.component';
 export const ROUTES: Routes = [
   { path: 'callback', component: CallbackComponent },
   { path: 'congregations', canActivate: [AuthGuard], component: SelectCongregationComponent },
-  { path: ':congregationId', component: LayoutComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+  { path: ':congregationId', component: LayoutComponent, canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard], children: [
     {path: 'home', component: HomeComponent},
     {path: 'content', component: ContentComponent},
     {path: 'audio', component: AudioComponent},

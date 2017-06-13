@@ -6,7 +6,7 @@ import auth0 from 'auth0-js';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class OAuth2AuthService implements AuthService{
+export class OAuth2AuthService implements AuthService {
 
   private authorizeUri = process.env.AUTHORIZE_URI || 'http://localhost:9999/oauth/authorize';
   private clientId = process.env.CLIENT_ID || 'acme';
@@ -52,6 +52,13 @@ export class OAuth2AuthService implements AuthService{
     });
   }
 
+  public isAuthenticated(): boolean {
+    // Check whether the current time is past the
+    // access token's expiry time
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
+  }
+
   private setSession(authResult): void {
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
@@ -59,12 +66,5 @@ export class OAuth2AuthService implements AuthService{
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
   }
-
-  public isAuthenticated(): boolean {
-  // Check whether the current time is past the
-  // access token's expiry time
-  const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-  return new Date().getTime() < expiresAt;
-}
 
 }

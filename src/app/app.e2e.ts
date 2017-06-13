@@ -6,10 +6,4 @@ describe('App', () => {
     browser.get('/');
   });
 
-  it('should have a title', () => {
-    let subject = browser.getTitle();
-    let result  = 'JSound';
-    expect(subject).toEqual(result);
-  });
-
 });
