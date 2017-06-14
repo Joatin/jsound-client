@@ -6,8 +6,8 @@ export class FakeAuthService implements AuthService {
     console.log('login');
   }
 
-  public logout(): Observable<void> {
-    return undefined;
+  public logout(): void {
+    console.log('logout');
   }
 
   public isAuthenticated(): boolean {

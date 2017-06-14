@@ -26,7 +26,7 @@ export class AppComponent {
     public appState: AppState,
     public auth: AuthService
   ) {
-    auth['handleAuthentication']();
+    auth.handleAuthentication();
   }
 
 }

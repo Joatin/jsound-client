@@ -50,6 +50,7 @@ import { contentReducerFunc } from './content/content.reducer';
 import { AuthGuard } from './auth/auth-guard.service';
 import { SelectCongregationComponent } from './congregation/select-congregation.component';
 import { CallbackComponent } from './auth/callback/callback.component';
+import { IndexComponent } from './home/index.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -84,7 +85,8 @@ type StoreType = {
     DurationPipe,
     ShowContentDialogComponent,
     SelectCongregationComponent,
-    CallbackComponent
+    CallbackComponent,
+    IndexComponent
 
   ],
   /**
