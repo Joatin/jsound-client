@@ -7,9 +7,6 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class OAuth2AuthService implements AuthService {
-
-  private authorizeUri = process.env.AUTHORIZE_URI || 'http://localhost:9999/oauth/authorize';
-  private clientId = process.env.CLIENT_ID || 'acme';
   private auth0 = new auth0.WebAuth({
     clientID: 'xaSx4TpSWIihZvAC0XqAxhWy4blxwzwA',
     domain: 'jsound.eu.auth0.com',
@@ -30,12 +27,11 @@ export class OAuth2AuthService implements AuthService {
     this.auth0.authorize();
   }
 
-  public logout(): Observable<void> {
+  public logout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     this.router.navigate(['/']);
-    return undefined;
   }
 
   public handleAuthentication(): void {

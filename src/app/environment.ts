@@ -15,7 +15,7 @@ import { OAuth2AuthService } from './auth/oauth2-auth.service';
  * Environment Providers
  */
 let PROVIDERS: any[] = [
-  AuthService
+  {provide: AuthService, useClass: OAuth2AuthService}
   /**
    * Common env directives
    */
@@ -41,7 +41,7 @@ if ('production' === ENV) {
 
   PROVIDERS = [
     ...PROVIDERS,
-    {provide: AuthService, useValue: OAuth2AuthService}
+    {provide: AuthService, useClass: OAuth2AuthService}
     /**
      * Custom providers in production.
      */
