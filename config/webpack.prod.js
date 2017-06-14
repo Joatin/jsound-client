@@ -31,13 +31,15 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
+const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback';
 const METADATA = webpackMerge(commonConfig({
   env: ENV
 }).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
-  HMR: false
+  HMR: false,
+  OAUTH_REDIRECT_URI: OAUTH_REDIRECT_URI
 });
 
 module.exports = function (env) {
@@ -167,6 +169,7 @@ module.exports = function (env) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
+          'OAUTH_REDIRECT_URI': METADATA.OAUTH_REDIRECT_URI
         }
       }),
 

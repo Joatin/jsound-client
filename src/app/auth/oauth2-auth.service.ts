@@ -12,7 +12,7 @@ export class OAuth2AuthService implements AuthService {
     domain: 'jsound.eu.auth0.com',
     responseType: 'token id_token',
     audience: 'https://jsound.eu.auth0.com/userinfo',
-    redirectUri: process.env['OAUTH_REDIRECT_URI'] || 'http://localhost:3000/callback',
+    redirectUri: process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback',
     scope: 'openid'
   });
 
