@@ -169,7 +169,7 @@ module.exports = function (env) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
-          'OAUTH_REDIRECT_URI': METADATA.OAUTH_REDIRECT_URI
+          'OAUTH_REDIRECT_URI': JSON.stringify(METADATA.OAUTH_REDIRECT_URI)
         }
       }),
 
