@@ -98,6 +98,7 @@
     "material": "^0.1.1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "5.0.2",
+    "socket.io-client": "^2.0.3",
     "socketcluster-client": "^5.5.1",
     "videogular2": "^5.4.5",
     "zone.js": "~0.8.5"
@@ -108,6 +109,7 @@
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "2.5.45",
     "@types/node": "^7.0.13",
+    "@types/socket.io-client": "^1.4.29",
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.6.28",
     "@types/webpack": "^2.2.15",
@@ -149,6 +151,7 @@
     "rimraf": "~2.6.1",
     "sass-loader": "^6.0.3",
     "script-ext-html-webpack-plugin": "^1.7.1",
+    "socket.io-client": "^2.0.3",
     "source-map-loader": "^0.2.1",
     "string-replace-loader": "~1.2.0",
     "style-loader": "^0.16.1",

@@ -4,6 +4,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AppState } from './app.service';
 import { AuthService } from './auth/auth.service';
+import { SocketService } from './util/socket.service';
 
 /**
  * App Component
@@ -24,9 +25,14 @@ export class AppComponent {
 
   constructor(
     public appState: AppState,
-    public auth: AuthService
+    public auth: AuthService,
+    private socket: SocketService
   ) {
     auth.handleAuthentication();
+    if(auth.isAuthenticated()){
+      socket.init(localStorage.getItem('access_token'));
+    }
+
   }
 
 }

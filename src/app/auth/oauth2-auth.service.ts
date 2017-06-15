@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { Inject, Injectable } from '@angular/core';
 import auth0 from 'auth0-js';
 import { Router } from '@angular/router';
+import { SocketService } from '../util/socket.service';
 
 @Injectable()
 export class OAuth2AuthService implements AuthService {
@@ -11,7 +12,7 @@ export class OAuth2AuthService implements AuthService {
     clientID: 'xaSx4TpSWIihZvAC0XqAxhWy4blxwzwA',
     domain: 'jsound.eu.auth0.com',
     responseType: 'token id_token',
-    audience: 'https://jsound.eu.auth0.com/userinfo',
+    audience: 'http://localhost:3100',
     redirectUri: process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback',
     scope: 'openid'
   });
@@ -19,6 +20,7 @@ export class OAuth2AuthService implements AuthService {
   constructor(
     private router: Router,
     @Inject(DOCUMENT) private document: any,
+    private socket: SocketService
   ) {
 
   }
@@ -36,10 +38,12 @@ export class OAuth2AuthService implements AuthService {
 
   public handleAuthentication(): void {
     const router = this.router;
+    const socket = this.socket;
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
+        socket.init(authResult.accessToken);
         router.navigate(['/home']);
       } else if (err) {
         this.router.navigate(['/home']);
