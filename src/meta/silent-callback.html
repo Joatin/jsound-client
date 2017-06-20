@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js"></script>
+  <script type="text/javascript">
+    var webAuth = new auth0.WebAuth({
+      domain: 'jsound.eu.auth0.com',
+      clientID: '...'
+    });
+    var result = webAuth.parseHash(window.location.hash, function(err, data) {
+      parent.postMessage(err || data, "https://example.com/");
+    });
+  </script>
+</head>
+<body></body>
+</html>

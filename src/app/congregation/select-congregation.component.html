@@ -1,9 +1,16 @@
+<md-toolbar class="horizontal" color="primary">
+  <span>JSound</span>
+  <div class="flex"></div>
+  <button md-button *ngIf="!authService.isAuthenticated()">Signup</button>
+  <button md-button (click)="login()" *ngIf="!authService.isAuthenticated()">Login</button>
+  <button md-button (click)="logout()" *ngIf="authService.isAuthenticated()">Logout</button>
+</md-toolbar>
 <div class="content">
   <h3>Congregations</h3>
   <md-list>
-    <md-list-item>
-      <md-icon md-list-icon>folder</md-icon>
-      <h4 md-line></h4>
+    <md-list-item *ngFor="let congregation of congregations$ | async" [routerLink]="['/' + congregation.uniqueName, 'home']" >
+      <md-icon md-list-icon>star</md-icon>
+      <h4 md-line>{{congregation.name}}</h4>
     </md-list-item>
   </md-list>
 </div>

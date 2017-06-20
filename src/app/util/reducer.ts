@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 export abstract class Reducer<T> {
 
   public abstract initialState: T;
-  private handlers = {};
+  private handlers = this.handlers || {};
 
   public reduce(state: T = this.initialState, action: Action): T {
     if (this.handlers[action.constructor.name]) {
@@ -15,8 +15,9 @@ export abstract class Reducer<T> {
   }
 }
 
-export function type(value: { new(): Action; }) {
+export function Type(value: { new(p1?: any): Action; }) {
   return (target: Reducer<any>, propertyKey: string) => {
+    target['handlers'] = target['handlers'] || {};
     target['handlers'][value.name] = target[propertyKey];
   };
 }

@@ -391,7 +391,7 @@ module.exports = function (options) {
        *
        * https://github.com/szrenwei/inline-manifest-webpack-plugin
        */
-      new InlineManifestWebpackPlugin(),
+      new InlineManifestWebpackPlugin()
     ],
 
     /**
@@ -406,7 +406,9 @@ module.exports = function (options) {
       process: true,
       module: false,
       clearImmediate: false,
-      setImmediate: false
+      setImmediate: false,
+      net: 'mock',
+      dns: 'mock'
     }
 
   };

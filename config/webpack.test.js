@@ -268,7 +268,9 @@ module.exports = function (options) {
       crypto: 'empty',
       module: false,
       clearImmediate: false,
-      setImmediate: false
+      setImmediate: false,
+      net: 'mock',
+      dns: 'mock'
     }
 
   };

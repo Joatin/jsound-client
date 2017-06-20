@@ -11,12 +11,16 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { SelectCongregationComponent } from './congregation/select-congregation.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { IndexComponent } from './home/index.component';
+import { CongregationGuardService } from './congregation/congregation-guard.service';
 
 export const ROUTES: Routes = [
   {path: '', component: IndexComponent},
   { path: 'callback', component: CallbackComponent },
+  { path: '404', component: NoContentComponent },
   { path: 'congregations', canActivate: [AuthGuard], component: SelectCongregationComponent },
-  { path: ':congregationId', component: LayoutComponent, canActivate: [AuthGuard],
+  { path: ':congregationId',
+    component: LayoutComponent,
+    canActivate: [AuthGuard, CongregationGuardService],
     canActivateChild: [AuthGuard], children: [
     {path: 'home', component: HomeComponent},
     {path: 'content', component: ContentComponent},
@@ -24,6 +28,5 @@ export const ROUTES: Routes = [
     {path: 'viewers', component: ViewerComponent},
     {path: 'meeting', component: MeetingComponent}
   ] },
-  { path: '404', component: NoContentComponent },
   { path: '**', redirectTo: '/404', pathMatch: 'full'  },
 ];
