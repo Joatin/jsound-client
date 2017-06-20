@@ -1,6 +1,7 @@
 import { SocketService } from './socket.service';
 import { Injectable } from '@angular/core';
-import { Manager } from 'socket.io-client'
+import { Manager } from 'socket.io-client';
+import { AuthService } from '../auth/auth.service';
 
 /**
  * A socket service that dependes on the socket.io library.
@@ -14,7 +15,9 @@ export class IoSocketService implements SocketService {
 
   private socket: any;
 
-  constructor() {}
+  constructor(
+    private authService: AuthService
+  ) {}
 
   public init(authToken: string): void {
     this.connect(authToken);
@@ -22,32 +25,31 @@ export class IoSocketService implements SocketService {
 
   private connect(authToken: string): void {
     const self = this;
-    this.manager.open((error)=>{
-      if(error){
+    this.manager.open((error) => {
+      if (error) {
         console.log(error);
       } else {
         self.socket = self.manager.socket('/').open();
         self.socket.on('connect', self.handleConnect(authToken));
       }
-    })
+    });
   };
 
   private handleConnect(authToken: string) {
     const self = this;
-    return ()=>{
-      console.log('token');
-      console.log(authToken);
+    return () => {
       self.socket
-        .emit('authenticate', {token: authToken}) //send the jwt
+        .emit('authenticate', {token: authToken}) // send the jwt
         .on('authenticated', () => {
-          //do other things
-          console.log('socket authenticated');
+          // do other things
         })
         .on('unauthorized', (msg) => {
-          console.log("unauthorized: " + JSON.stringify(msg.data));
+          self.authService.getRenewedToken().subscribe((token: string) => {
+            self.handleConnect(token);
+          });
+          console.log('unauthorized: ' + JSON.stringify(msg.data));
           throw new Error(msg.data.type);
-        })
-    }
+        });
+    };
   }
-
 }

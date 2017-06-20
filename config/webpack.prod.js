@@ -31,7 +31,7 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
-const SOCKET_URI = process.enc.SOCKET_URI || 'http://localhost:3100';
+const SOCKET_URI = process.env.SOCKET_URI || 'http://localhost:3100';
 const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback';
 const METADATA = webpackMerge(commonConfig({
   env: ENV
@@ -100,6 +100,8 @@ module.exports = function (env) {
     module: {
 
       rules: [
+
+        { test: /\.js$/, loader: 'babel-loader' },
 
         /**
          * Extract CSS files from .src/styles directory to external CSS file
@@ -201,7 +203,7 @@ module.exports = function (env) {
         // comments: true, //debug
 
 
-        beautify: false, //prod
+        beautify: true, //prod
         output: {
           comments: false
         }, //prod
@@ -340,7 +342,7 @@ module.exports = function (env) {
     node: {
       global: true,
       crypto: 'empty',
-      process: false,
+      process: 'mock',
       module: false,
       clearImmediate: false,
       setImmediate: false

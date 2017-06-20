@@ -4,7 +4,7 @@
       <span>Hall</span>
     </md-toolbar>
     <nav>
-      <a md-button routerLink="./home'" routerLinkActive="active-link">Home</a>
+      <a md-button routerLink="./home" routerLinkActive="active-link">Home</a>
       <a md-button routerLink="./meeting" routerLinkActive="active-link">Meeting</a>
       <a md-button routerLink="./content" routerLinkActive="active-link">Content</a>
       <a md-button routerLink="./audio" routerLinkActive="active-link">Audio</a>
@@ -22,8 +22,8 @@
         <button md-menu-item>Settings</button>
         <button md-menu-item (click)="logout()">Logout</button>
       </md-menu>
-      <button md-icon-button [mdMenuTriggerFor]="appMenu">
-        <md-icon>more_vert</md-icon>
+      <button md-button [mdMenuTriggerFor]="appMenu">
+        {{firstName$ | async}}
       </button>
     </md-toolbar>
     <main>

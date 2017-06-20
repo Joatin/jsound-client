@@ -51,12 +51,17 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { SelectCongregationComponent } from './congregation/select-congregation.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { IndexComponent } from './home/index.component';
+import { CongregationGuardService } from './congregation/congregation-guard.service';
+import { authReducerFunc } from './auth/auth.reducer';
+import { congregationReducerFunc } from './congregation/congregation.reducer';
+import { layoutReducerFunc } from './layout/layout.reducer';
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  AuthGuard
+  AuthGuard,
+  CongregationGuardService
 ];
 
 type StoreType = {
@@ -99,7 +104,12 @@ type StoreType = {
     HttpModule,
     FlexLayoutModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
-    StoreModule.provideStore( { content: contentReducerFunc }, {
+    StoreModule.provideStore( {
+      content: contentReducerFunc,
+      auth: authReducerFunc,
+      congregation: congregationReducerFunc,
+      layout: layoutReducerFunc
+    }, {
       router: {
         path: window.location.pathname + window.location.search
       }

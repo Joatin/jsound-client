@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { OAuth2AuthService } from './auth/oauth2-auth.service';
-import { SocketService } from './util/socket.service';
-import { IoSocketService } from './util/io-socket.service';
+import { SocketService } from './socket/socket.service';
+import { IoSocketService } from './socket/io-socket.service';
 /**
  * Environment Providers
  */

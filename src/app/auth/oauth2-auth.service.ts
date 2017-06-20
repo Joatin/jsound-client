@@ -1,10 +1,13 @@
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Inject, Injectable } from '@angular/core';
 import auth0 from 'auth0-js';
 import { Router } from '@angular/router';
-import { SocketService } from '../util/socket.service';
+import { SocketService } from '../socket/socket.service';
+import { AppState } from '../app.state';
+import { Store } from '@ngrx/store';
+import { LoginAction } from './auth.actions';
 
 @Injectable()
 export class OAuth2AuthService implements AuthService {
@@ -14,13 +17,13 @@ export class OAuth2AuthService implements AuthService {
     responseType: 'token id_token',
     audience: 'http://localhost:3100',
     redirectUri: process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback',
-    scope: 'openid'
+    scope: 'openid profile email'
   });
 
   constructor(
     private router: Router,
     @Inject(DOCUMENT) private document: any,
-    private socket: SocketService
+    private store: Store<AppState>
   ) {
 
   }
@@ -36,19 +39,17 @@ export class OAuth2AuthService implements AuthService {
     this.router.navigate(['/']);
   }
 
-  public handleAuthentication(): void {
-    const router = this.router;
-    const socket = this.socket;
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        this.setSession(authResult);
-        socket.init(authResult.accessToken);
-        router.navigate(['/home']);
-      } else if (err) {
-        this.router.navigate(['/home']);
-        console.log(err);
-      }
+  public handleAuthentication(): Observable<any> {
+    return Observable.create((observer: Observer<any>) => {
+      this.auth0.parseHash((err, authResult) => {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setSession(authResult);
+          observer.next(authResult);
+          observer.complete();
+        } else if (err) {
+          observer.error(err);
+        }
+      });
     });
   }
 
@@ -57,6 +58,30 @@ export class OAuth2AuthService implements AuthService {
     // access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  public getRenewedToken(): Observable<string> {
+    console.log('Calling get renewed');
+    const self = this;
+    return Observable.create((observer: Observer<string>) => {
+      self.auth0.renewAuth({
+        redirectUri: 'http://localhost:3000/silent-callback.html',
+        usePostMessage: true
+      }, (err, authResult) => {
+          if (err) {
+            self.router.navigate(['/home']);
+            console.log(err);
+          } else {
+            self.setSession(authResult);
+            self.store.dispatch(new LoginAction({
+              firstName: authResult.idTokenPayload.given_name,
+              pictureUrl: authResult.idTokenPayload.picture
+            }));
+            observer.next(authResult.accessToken);
+            observer.complete();
+          }
+      });
+    });
   }
 
   private setSession(authResult): void {
