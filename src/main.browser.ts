@@ -1,3 +1,5 @@
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+
 /**
  * Angular bootstrapping
  */
@@ -9,6 +11,13 @@ import { bootloader } from '@angularclass/hmr';
  * our top level module that holds all of our components
  */
 import { AppModule } from './app/app.module';
+
+if (process.env.ENV === 'production') {
+  OfflinePluginRuntime.install({
+    onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
+    onUpdated: () => location.reload(),
+  });
+}
 
 /**
  * Bootstrap our Angular app with a top level NgModule

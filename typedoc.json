@@ -1,5 +1,5 @@
 {
-  "mode": "modules",
+  "mode": "file",
   "out": "doc",
   "theme": "default",
   "ignoreCompilerErrors": "true",
@@ -11,5 +11,11 @@
   "stripInternal": "true",
   "suppressExcessPropertyErrors": "true",
   "suppressImplicitAnyIndexErrors": "true",
-  "module": "commonjs"
+  "module": "commonjs",
+  "includeDeclarations": false,
+  "excludeExternals": true,
+  "name": "JSound",
+  "readme": "./config/TYPEDOC.md",
+  "externalPattern": "node_modules/",
+  "exclude": ["features/**/*"]
 }
