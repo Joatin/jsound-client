@@ -29,7 +29,12 @@
   },
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "compiled",
+    "features"
+  ],
+  "files": [
+    "src/"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
