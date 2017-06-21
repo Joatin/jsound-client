@@ -24,6 +24,7 @@ const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplaceme
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const OptimizeJsPlugin = require('optimize-js-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 /**
  * Webpack Constants
@@ -32,7 +33,7 @@ const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const SOCKET_URI = process.env.SOCKET_URI || 'http://localhost:3100';
-const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'http://localhost:3000/callback';
+const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'http://localhost:8080/callback';
 const METADATA = webpackMerge(commonConfig({
   env: ENV
 }).metadata, {
@@ -330,6 +331,12 @@ module.exports = function (env) {
        *
        * See: https://github.com/th0r/webpack-bundle-analyzer
        */
+
+      new OfflinePlugin({
+        ServiceWorker: {
+          navigateFallbackURL: '/'
+        },
+      })
 
     ],
 

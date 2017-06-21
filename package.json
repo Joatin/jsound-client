@@ -103,6 +103,7 @@
     "socket.io-client": "^2.0.3",
     "socketcluster-client": "^5.5.1",
     "videogular2": "^5.4.5",
+    "winston": "^2.3.1",
     "zone.js": "~0.8.5"
   },
   "devDependencies": {
@@ -117,6 +118,7 @@
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.6.28",
     "@types/webpack": "^2.2.15",
+    "@types/winston": "^2.3.3",
     "add-asset-html-webpack-plugin": "^1.0.2",
     "angular2-template-loader": "^0.6.2",
     "assets-webpack-plugin": "^3.5.1",
@@ -151,6 +153,7 @@
     "ngc-webpack": "~2.0.0",
     "node-sass": "^4.5.2",
     "npm-run-all": "^4.0.2",
+    "offline-plugin": "^4.8.1",
     "optimize-js-plugin": "0.0.4",
     "parse5": "^3.0.2",
     "protractor": "^5.1.1",
