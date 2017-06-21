@@ -9,6 +9,13 @@ import { decorateModuleRef } from './app/environment';
  */
 import { AppModuleNgFactory } from '../compiled/src/app/app.module.ngfactory';
 
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+
+OfflinePluginRuntime.install({
+  onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
+  onUpdated: () => location.reload(),
+});
+
 /**
  * Bootstrap our Angular app with a top level NgModule.
  */

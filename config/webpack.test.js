@@ -264,7 +264,7 @@ module.exports = function (options) {
      */
     node: {
       global: true,
-      process: false,
+      process: 'mock',
       crypto: 'empty',
       module: false,
       clearImmediate: false,
