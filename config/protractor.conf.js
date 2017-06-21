@@ -6,28 +6,31 @@ require('ts-node/register');
 var helpers = require('./helpers');
 
 exports.config = {
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'https://localhost:3000/',
 
   /**
    * Use `npm run e2e`
    */
   specs: [
-    helpers.root('src/**/**.e2e.ts'),
-    helpers.root('src/**/*.e2e.ts')
+    helpers.root('features/**/*.feature') // accepts a glob
   ],
   exclude: [],
 
-  framework: 'jasmine2',
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
 
   allScriptsTimeout: 110000,
 
-  jasmineNodeOpts: {
-    showTiming: true,
-    showColors: true,
-    isVerbose: false,
-    includeStackTrace: false,
-    defaultTimeoutInterval: 400000
+  cucumberOpts: {
+    compiler: "ts:ts-node/register",
+    require: [
+      helpers.root('features/step_definitions/**/*.ts'),
+      helpers.root('features/support/**/*.ts')
+    ],
+    strict: true,
+    format: ['progress', 'pretty:output.txt'],
   },
+
   directConnect: true,
 
   capabilities: {
@@ -39,6 +42,7 @@ exports.config = {
 
   onPrepare: function() {
     browser.ignoreSynchronization = true;
+    browser.manage().window().maximize();
   },
 
   /**
