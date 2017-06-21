@@ -12,9 +12,10 @@
   "suppressExcessPropertyErrors": "true",
   "suppressImplicitAnyIndexErrors": "true",
   "module": "commonjs",
-  "includeDeclarations": true,
+  "includeDeclarations": false,
   "excludeExternals": true,
   "name": "JSound",
   "readme": "./config/TYPEDOC.md",
-  "externalPattern": "node_modules/"
+  "externalPattern": "node_modules/",
+  "exclude": ["features/**/*"]
 }
