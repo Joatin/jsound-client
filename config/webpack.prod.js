@@ -333,6 +333,9 @@ module.exports = function (env) {
        */
 
       new OfflinePlugin({
+        excludes: [
+          '_redirects'
+        ],
         ServiceWorker: {
           navigateFallbackURL: '/'
         },
