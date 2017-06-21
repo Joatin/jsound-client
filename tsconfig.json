@@ -34,7 +34,7 @@
     "features"
   ],
   "files": [
-    "src/"
+    "src/app/"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

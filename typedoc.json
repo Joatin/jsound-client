@@ -15,6 +15,6 @@
   "includeDeclarations": true,
   "excludeExternals": true,
   "name": "JSound",
-  "readme": "./README.md",
+  "readme": "./config/TYPEDOC.md",
   "externalPattern": "node_modules/"
 }
