@@ -2,6 +2,9 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
 export class FakeAuthService implements AuthService {
+  public scheduleRenewal(): void {
+    console.log('scheduleRenewal');
+  }
   public handleAuthentication(): Observable<any> {
     return undefined;
   }

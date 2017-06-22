@@ -36,7 +36,8 @@ describe(`App`, () => {
           subscribe: jasmine.createSpy('subscribe')
         };
       }),
-      isAuthenticated: jasmine.createSpy('isAuthenticated')
+      isAuthenticated: jasmine.createSpy('isAuthenticated'),
+      scheduleRenewal: jasmine.createSpy('scheduleRenewal')
     };
     TestBed.configureTestingModule({
       declarations: [ AppComponent ],

@@ -15,3 +15,29 @@ nav > a[md-button] {
 .active-link {
   font-weight: bolder;
 }
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: calc(100vh - 64px);
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+  color: gray;
+  font-size: small;
+  padding: 0 16px 0 16px;
+}
+
+footer div {
+  padding: 8px;
+}
+
+hr {
+  border-color: inherit;
+}

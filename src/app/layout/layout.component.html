@@ -1,7 +1,19 @@
 <md-sidenav-container>
+  <md-toolbar class="horizontal" color="primary">
+    <button md-icon-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></button>
+    <span>JSound</span>
+    <div class="flex"></div>
+    <md-menu #appMenu="mdMenu">
+      <button md-menu-item>Settings</button>
+      <button md-menu-item (click)="logout()">Logout</button>
+    </md-menu>
+    <button md-button [mdMenuTriggerFor]="appMenu">
+      {{firstName$ | async}}
+    </button>
+  </md-toolbar>
   <md-sidenav #sidenav [mode]="media.isActive('xs') || media.isActive('sm') ? 'push' : 'side'" [disableClose]="!(media.isActive('xs') || media.isActive('sm'))" [opened]="!(media.isActive('xs') || media.isActive('sm'))">
     <md-toolbar color="primary">
-      <span>Hall</span>
+      <span>{{congregationName$ | async}}</span>
     </md-toolbar>
     <nav>
       <a md-button routerLink="./home" routerLinkActive="active-link">Home</a>
@@ -13,22 +25,16 @@
     </nav>
   </md-sidenav>
 
-  <div>
-    <md-toolbar class="horizontal" color="primary">
-      <button md-icon-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></button>
-      <span>JSound</span>
-      <div class="flex"></div>
-      <md-menu #appMenu="mdMenu">
-        <button md-menu-item>Settings</button>
-        <button md-menu-item (click)="logout()">Logout</button>
-      </md-menu>
-      <button md-button [mdMenuTriggerFor]="appMenu">
-        {{firstName$ | async}}
-      </button>
-    </md-toolbar>
+  <div class="content-area">
     <main>
       <router-outlet></router-outlet>
     </main>
+    <footer>
+      <md-divider></md-divider>
+      <div>
+        <span>Copyright: Joatin Granlund</span>
+      </div>
+    </footer>
   </div>
 
 </md-sidenav-container>

@@ -34,6 +34,7 @@ const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 8080;
 const SOCKET_URI = process.env.SOCKET_URI || 'http://localhost:3100';
 const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'http://localhost:8080/callback';
+const OAUTH_SILENT_CALLBACK_URI = process.env.OAUTH_SILENT_CALLBACK_URI || 'https://localhost:8080/silent-callback.html';
 const METADATA = webpackMerge(commonConfig({
   env: ENV
 }).metadata, {
@@ -42,6 +43,7 @@ const METADATA = webpackMerge(commonConfig({
   ENV: ENV,
   HMR: false,
   OAUTH_REDIRECT_URI: OAUTH_REDIRECT_URI,
+  OAUTH_SILENT_CALLBACK_URI: OAUTH_SILENT_CALLBACK_URI,
   SOCKET_URI: SOCKET_URI
 });
 
@@ -175,6 +177,7 @@ module.exports = function (env) {
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
           'OAUTH_REDIRECT_URI': JSON.stringify(METADATA.OAUTH_REDIRECT_URI),
+          'OAUTH_SILENT_CALLBACK_URI': JSON.stringify(METADATA.OAUTH_SILENT_CALLBACK_URI),
           'SOCKET_URI': JSON.stringify(METADATA.SOCKET_URI)
         }
       }),

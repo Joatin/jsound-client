@@ -22,11 +22,17 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
+const SOCKET_URI = process.env.SOCKET_URI || 'http://localhost:3100';
+const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'https://localhost:3000/callback';
+const OAUTH_SILENT_CALLBACK_URI = process.env.OAUTH_SILENT_CALLBACK_URI || 'https://localhost:3000/silent-callback.html';
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
-  HMR: HMR
+  HMR: HMR,
+  OAUTH_REDIRECT_URI: OAUTH_REDIRECT_URI,
+  OAUTH_SILENT_CALLBACK_URI: OAUTH_SILENT_CALLBACK_URI,
+  SOCKET_URI: SOCKET_URI
 });
 
 
@@ -139,6 +145,9 @@ module.exports = function (options) {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
           'HMR': METADATA.HMR,
+          'OAUTH_REDIRECT_URI': JSON.stringify(METADATA.OAUTH_REDIRECT_URI),
+          'OAUTH_SILENT_CALLBACK_URI': JSON.stringify(METADATA.OAUTH_SILENT_CALLBACK_URI),
+          'SOCKET_URI': JSON.stringify(METADATA.SOCKET_URI)
         }
       }),
 
