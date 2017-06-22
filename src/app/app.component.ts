@@ -47,6 +47,7 @@ export class AppComponent {
       this.router.navigate(['/home']);
       console.log(error);
     });
+    auth.scheduleRenewal();
 
     if (auth.isAuthenticated()) {
       const idToken = localStorage.getItem('id_token');

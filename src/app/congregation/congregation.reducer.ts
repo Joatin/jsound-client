@@ -1,6 +1,6 @@
 import { Reducer, Type } from '../util/reducer';
 import { CongregationState } from './congregation.state';
-import { LoadCongregationsAction } from './congregation.actions';
+import { LoadCongregationsAction, SelectCongregationAction } from './congregation.actions';
 
 export class CongregationReducer extends Reducer<CongregationState> {
   public initialState: CongregationState = {
@@ -18,13 +18,21 @@ export class CongregationReducer extends Reducer<CongregationState> {
         name: 'test3',
         uniqueName: 'test3'
       }
-    ]
+    ],
+    selectedCongregation: null
   };
 
   @Type(LoadCongregationsAction)
   private handleLoadCongregations(action: LoadCongregationsAction) {
     return {
       isLoadingAuthorizedCongregations: true
+    };
+  }
+
+  @Type(SelectCongregationAction)
+  private handleSelectCongregation(action: SelectCongregationAction) {
+    return {
+      selectedCongregation: action.congregation
     };
   }
 }

@@ -5,5 +5,6 @@ export abstract class AuthService {
   public abstract logout(): void;
   public abstract isAuthenticated(): boolean;
   public abstract handleAuthentication(): Observable<any>;
-  public abstract getRenewedToken(): Observable<string>
+  public abstract getRenewedToken(): Observable<string>;
+  public abstract scheduleRenewal(): void;
 }
