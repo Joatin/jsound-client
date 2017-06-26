@@ -1,3 +1,5 @@
+sudo: required
+dist: trusty
 addons:
   apt:
     sources:
@@ -18,16 +20,17 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3
-script:
-  - npm rebuild node-sass
-  - yarn ci:travis
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 cache:
   yarn: true
   directories:
     - node_modules
 jobs:
   include:
+    - stage: test
+      script:
+        - npm rebuild node-sass
+        - yarn ci:travis
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
     - stage: deploy
-      script: yarn clean
-      node_js: "6"
+      script:
+       - yarn clean
