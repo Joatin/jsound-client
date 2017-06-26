@@ -1,5 +1,5 @@
 import {defineSupportCode} from 'cucumber';
-import { browser } from 'protractor';
+import { browser, by } from 'protractor';
 import {use, expect} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
@@ -8,23 +8,25 @@ use(chaiAsPromised);
 defineSupportCode(function({Then, When, Given}) {
 
   Given('I am logged out', function () {
-    // Write code here that turns the phrase above into concrete actions
-    browser.get('/')
+    return browser.get('http://localhost:3000/').then(()=>{
+      return expect(browser.findElement(by.id('loginButton'))).eventually.exist;
+    });
   });
 
   When('I click on the login button', function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    browser.findElement(by.id('loginButton')).click();
   });
 
   Then('I should be redirected to the login page', function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    return expect(browser.getCurrentUrl()).eventually.contains('jsound.eu.auth0.com');
   });
 
   Given('I am on the login form page', function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    return browser.get('http://localhost:3000/').then(()=>{
+      expect(browser.findElement(by.id('loginButton'))).eventually.exist;
+      browser.findElement(by.id('loginButton')).click();
+      return expect(browser.getCurrentUrl()).eventually.contains('jsound.eu.auth0.com');
+    });
   });
 
   When('I fill in the form', function (table) {
