@@ -1,29 +1,29 @@
 sudo: required
 dist: trusty
+
 addons:
   apt:
     sources:
       - google-chrome
     packages:
       - google-chrome-stable
+
 language: node_js
+
 node_js:
   - "6"
   - "7"
   - "node"
-matrix:
-  fast_finish: true
+
 install:
   - yarn
   - yarn add --dev coveralls
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3
-cache:
-  yarn: true
-  directories:
-    - node_modules
+
 jobs:
   include:
     - stage: test
@@ -34,3 +34,8 @@ jobs:
     - stage: deploy
       script:
        - yarn clean
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
