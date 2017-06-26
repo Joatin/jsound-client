@@ -29,11 +29,12 @@ cache:
   directories:
     - node_modules
 jobs:
-  - stage: deploy
-    install:
-      - yarn
-    script: skip
-    node_js: "6"
-    cache:
-      directories:
-        - node_modules
+  include:
+    - stage: deploy
+      install:
+        - yarn
+      script: skip
+      node_js: "6"
+      cache:
+        directories:
+          - node_modules
