@@ -24,7 +24,9 @@
       "node",
       "source-map",
       "uglify-js",
-      "webpack"
+      "webpack",
+      "chai",
+      "joi"
     ]
   },
   "exclude": [

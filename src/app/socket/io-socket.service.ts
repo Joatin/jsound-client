@@ -9,7 +9,7 @@ import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class IoSocketService implements SocketService {
 
-  private manager = new Manager(process.env.SOCKET_URI || 'http://localhost:3100', {
+  private manager = new Manager(process.env.SOCKET_URI, {
     autoConnect: false
   });
 
