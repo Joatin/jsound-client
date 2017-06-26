@@ -8,7 +8,6 @@ addons:
       - google-chrome-stable
 language: node_js
 node_js:
-  - "5"
   - "6"
   - "7"
   - "node"
@@ -23,7 +22,7 @@ before_script:
   - sleep 3
 script:
   - npm rebuild node-sass
-  - yarn ci:travis:test
+  - yarn ci:travis
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 cache:
   yarn: true
