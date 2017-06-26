@@ -47,7 +47,6 @@
     "preclean:install": "npm run clean",
     "preversion": "npm test",
     "precommit": "npm test",
-    "prepush": "npm test",
     "protractor": "protractor",
     "protractor:delay": "sleep 3 && npm run protractor",
     "protractor:live": "protractor --elementExplorer",

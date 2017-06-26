@@ -14,9 +14,14 @@ matrix:
   fast_finish: true
 jobs:
   include:
-    - install:
+    - stage: unit tests
+      install:
         - yarn
         - yarn add --dev coveralls
+      before_script:
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - sleep 3
       script:
         - npm rebuild node-sass
         - yarn ci:travis:test
@@ -24,7 +29,8 @@ jobs:
       cache:
         directories:
           - node_modules
-    - install:
+    - stage: integration tests
+      install:
         - yarn
       before_script:
         - export DISPLAY=:99.0
