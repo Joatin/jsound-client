@@ -32,9 +32,9 @@ jobs:
     install:
     - yarn
     script:
-      - yarn semver-release pre
+      - yarn semantic-release pre
       - yarn build:aot
-      - yarn semver-release post
+      - yarn semantic-release post
     cache:
       yarn: true
       directories:
