@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Joatin/jsound-client.svg?branch=master)](https://travis-ci.org/Joatin/jsound-client) [![Coverage Status](https://coveralls.io/repos/github/Joatin/jsound-client/badge.svg?branch=develop)](https://coveralls.io/github/Joatin/jsound-client?branch=develop)
+[![Build Status](https://travis-ci.org/Joatin/jsound-client.svg?branch=master)](https://travis-ci.org/Joatin/jsound-client) [![Coverage Status](https://coveralls.io/repos/github/Joatin/jsound-client/badge.svg?branch=develop)](https://coveralls.io/github/Joatin/jsound-client?branch=develop) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # JSound Web Client
 

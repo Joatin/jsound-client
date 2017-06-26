@@ -22,7 +22,7 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
-const SOCKET_URI = process.env.SOCKET_URI || 'http://localhost:3100';
+const SOCKET_URI = process.env.SOCKET_URI || 'https://localhost:3100';
 const OAUTH_REDIRECT_URI = process.env.OAUTH_REDIRECT_URI || 'https://localhost:3000/callback';
 const OAUTH_SILENT_CALLBACK_URI = process.env.OAUTH_SILENT_CALLBACK_URI || 'https://localhost:3000/silent-callback.html';
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
