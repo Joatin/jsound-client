@@ -31,10 +31,5 @@ cache:
 jobs:
   include:
     - stage: deploy
-      install:
-        - yarn
-      script: skip
+      script: yarn clean
       node_js: "6"
-      cache:
-        directories:
-          - node_modules
