@@ -4303,6 +4303,12 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
+last-release-git@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/last-release-git/-/last-release-git-0.0.3.tgz#7c82611022b134a87415981a936e26c521f2ef91"
+  dependencies:
+    semver "^5.3.0"
+
 latest-version@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-3.1.0.tgz#a205383fea322b33b5ae3b18abee0dc2f356ee15"
