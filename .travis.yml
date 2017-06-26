@@ -28,10 +28,17 @@ jobs:
       - node_modules
   - stage: deploy
     node_js: '7'
+    language: node_js
+    install:
+    - yarn
     script:
       - yarn semver-release pre
       - yarn build:aot
       - yarn semver-release post
+    cache:
+      yarn: true
+      directories:
+      - node_modules
     deploy:
       provider: releases
       api_key:
