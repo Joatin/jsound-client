@@ -1,11 +1,5 @@
 sudo: required
 dist: trusty
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
 language: node_js
 node_js:
   - "6"
@@ -15,6 +9,12 @@ matrix:
 jobs:
   include:
     - stage: unit tests
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
       install:
         - yarn
         - yarn add --dev coveralls
@@ -30,6 +30,12 @@ jobs:
         directories:
           - node_modules
     - stage: integration tests
+      addons:
+        apt:
+          sources:
+            - google-chrome
+          packages:
+            - google-chrome-stable
       install:
         - yarn
       before_script:
