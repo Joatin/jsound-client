@@ -1,57 +1,40 @@
 sudo: required
 dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 language: node_js
 node_js:
+  - "5"
   - "6"
+  - "7"
   - "node"
 matrix:
   fast_finish: true
+install:
+  - yarn
+  - yarn add --dev coveralls
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+script:
+  - npm rebuild node-sass
+  - yarn ci:travis:test
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+cache:
+  yarn: true
+  directories:
+    - node_modules
 jobs:
-  include:
-    - stage: unit tests
-      addons:
-        apt:
-          sources:
-            - google-chrome
-          packages:
-            - google-chrome-stable
-      install:
-        - yarn
-        - yarn add --dev coveralls
-      before_script:
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-        - sleep 3
-      script:
-        - npm rebuild node-sass
-        - yarn ci:travis:test
-        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-      cache:
-        directories:
-          - node_modules
-    - stage: integration tests
-      addons:
-        apt:
-          sources:
-            - google-chrome
-          packages:
-            - google-chrome-stable
-      install:
-        - yarn
-      before_script:
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-        - sleep 3
-      script:
-        - npm rebuild node-sass
-        - yarn ci:travis:e2e
-      cache:
-        directories:
-          - node_modules
-    - stage: deploy
-      install:
-        - yarn
-      script: "test"
-      cache:
-        directories:
-          - node_modules
+  - stage: deploy
+    install:
+      - yarn
+    script: skip
+    node_js: "6"
+    cache:
+      directories:
+        - node_modules
