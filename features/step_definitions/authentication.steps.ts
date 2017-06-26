@@ -9,7 +9,7 @@ defineSupportCode(function({Then, When, Given}) {
 
   Given('I am logged out', function () {
     // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    browser.get('/')
   });
 
   When('I click on the login button', function () {
