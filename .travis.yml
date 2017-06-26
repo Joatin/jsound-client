@@ -35,6 +35,8 @@ jobs:
       - yarn semantic-release pre
       - yarn build:aot
       - yarn semantic-release post
+    branches:
+      only: [master]
     cache:
       yarn: true
       directories:
