@@ -28,7 +28,8 @@ exports.config = {
       helpers.root('features/support/**/*.ts')
     ],
     strict: true,
-    format: ['progress', 'pretty:output.txt'],
+    format: ['pretty', 'pretty:output.txt'],
+    "format-options": ['{ "snippetInterface": "promise"}']
   },
 
   directConnect: true,

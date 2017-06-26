@@ -9,6 +9,8 @@ Feature: Authentication
   Scenario: Login form
     Given I am on the login form page
     When I fill in the form
+      | username | password |
+      | testuser | test1234 |
     Then I should be redirected back to the app
 
   Scenario: Logout button

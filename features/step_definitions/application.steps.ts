@@ -11,7 +11,6 @@ defineSupportCode(function({Then, When}) {
   });
 
   Then('I should see the title {title}', function (title, callback: any) {
-    console.log(title);
     expect(browser.getTitle()).to.eventually.equal(title).and.notify(callback);
   });
 
