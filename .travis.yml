@@ -12,17 +12,34 @@ node_js:
   - "node"
 matrix:
   fast_finish: true
-install:
-  - yarn
-  - yarn add --dev coveralls
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
-script:
-  - npm rebuild node-sass
-  - yarn ci:travis
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-cache:
-  directories:
-    - node_modules
+jobs:
+  include:
+    - install:
+        - yarn
+        - yarn add --dev coveralls
+      script:
+        - npm rebuild node-sass
+        - yarn ci:travis:test
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      cache:
+        directories:
+          - node_modules
+    - install:
+        - yarn
+      before_script:
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - sleep 3
+      script:
+        - npm rebuild node-sass
+        - yarn ci:travis:e2e
+      cache:
+        directories:
+          - node_modules
+    - stage: deploy
+      install:
+        - yarn
+      script: "test"
+      cache:
+        directories:
+          - node_modules
